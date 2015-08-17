@@ -1,0 +1,44 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/LayOut.Master" AutoEventWireup="true" CodeBehind="MenuUsuario.master.cs" Inherits="Vlaza.MenuUsuario" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="cphHead" runat="server">
+    <asp:ContentPlaceHolder ID="cphHead" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="cphBody" runat="server">
+    <div class="main">
+        <div class="container">
+            <%--<ul class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="">Store</a></li>
+                    <li class="active">Standart forms</li>
+                </ul>--%>
+            <!-- BEGIN SIDEBAR & CONTENT -->
+            <div class="row margin-bottom-40">
+                <!-- BEGIN SIDEBAR -->
+          <div class="sidebar col-md-3 col-sm-3">
+            <ul class="list-group margin-bottom-25 sidebar-menu">
+              <li class="list-group-item clearfix"><a href="#"><i class="fa fa-angle-right"></i> Iniciar Sessão</a></li>
+              <li class="list-group-item clearfix"><a href="#"><i class="fa fa-angle-right"></i> Recuperar Senha</a></li>
+              <li class="list-group-item clearfix"><a href="#"><i class="fa fa-angle-right"></i> Minha Conta</a></li>
+              <li class="list-group-item clearfix"><a href="#"><i class="fa fa-angle-right"></i> Endereços de Entrega</a></li>
+              <li class="list-group-item clearfix"><a href="#"><i class="fa fa-angle-right"></i> Historial de Compra</a></li>
+<%--              <li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Returns</a></li>--%>
+              <%--<li class="list-group-item clearfix"><a href="javascript:;"><i class="fa fa-angle-right"></i> Newsletter</a></li>--%>
+            </ul>
+          </div>
+          <!-- END SIDEBAR -->
+
+                <!-- BEGIN CONTENT -->
+                <div class="col-md-9 col-sm-7">
+                    <h1>
+                        <asp:ContentPlaceHolder ID="cphTitulo" runat="server"></asp:ContentPlaceHolder>
+                    </h1>
+                    <div class="content-form-page">
+                        <asp:ContentPlaceHolder ID="cphBody" runat="server"></asp:ContentPlaceHolder>
+                    </div>
+                </div>
+                <!-- END CONTENT -->
+            </div>
+            <!-- END SIDEBAR & CONTENT -->
+        </div>
+    </div>
+</asp:Content>
