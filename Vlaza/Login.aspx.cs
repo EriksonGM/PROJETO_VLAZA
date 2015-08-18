@@ -19,28 +19,6 @@ namespace Vlaza
 
         }
 
-        protected void lbEntrar_Click(object sender, EventArgs e)
-        {
-            if (WebSecurity.Login(txtEmail.Text, txtPass.Text))
-            {
-
-                var returnUrl = Request.QueryString["ReturnUrl"];
-
-                if (string.IsNullOrEmpty(returnUrl))
-                {
-                    Response.Redirect("/Inicio.aspx");
-                }
-                else
-                {
-                    Response.Redirect(returnUrl);
-                }
-            }
-            else
-            {
-                //Response.Redirect(Request.RawUrl);
-            }
-        }
-
         protected void btnEntrar_Click(object sender, EventArgs e)
         {
 
@@ -48,8 +26,8 @@ namespace Vlaza
             {
                 if (WebSecurity.Login(txtEmail.Text, txtPass.Text))
                 {
-                    if (!string.IsNullOrEmpty(WebSecurity.CurrentUserName))
-                    {
+                    //if (!string.IsNullOrEmpty(WebSecurity.CurrentUserName))
+                    //{
                         try
                         {
                             using (SqlConnection SQLconn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conn"].ToString()))
@@ -59,7 +37,7 @@ namespace Vlaza
                                 cmd.CommandType = CommandType.StoredProcedure;
 
                                 cmd.Parameters.Add("@Email", SqlDbType.VarChar, 50);
-                                cmd.Parameters["@Email"].Value = WebSecurity.CurrentUserName;
+                                cmd.Parameters["@Email"].Value = txtEmail.Text;
 
                                 SQLconn.Open();
                                 //string U = cmd.ExecuteScalar().ToString();
@@ -72,7 +50,7 @@ namespace Vlaza
 
                             throw;
                         }
-                    }
+                    //}
 
                     var returnUrl = Request.QueryString["ReturnUrl"];
 

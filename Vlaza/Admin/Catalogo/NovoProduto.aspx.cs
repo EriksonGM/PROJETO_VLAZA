@@ -13,5 +13,11 @@ namespace Vlaza.Admin.Catalogo
         {
 
         }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            SqlDataSourceCategoria.InsertParameters["Id_Usuario"].DefaultValue = WebMatrix.WebData.WebSecurity.CurrentUserId.ToString();
+            
+        }
     }
 }
