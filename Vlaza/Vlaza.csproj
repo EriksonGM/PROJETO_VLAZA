@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin\Catalogo\Atributos.aspx" />
     <Content Include="Admin\Catalogo\Categorias.aspx" />
     <Content Include="Admin\Catalogo\NovoProduto.aspx" />
     <Content Include="Admin\Catalogo\Produtos.aspx" />
@@ -806,11 +808,13 @@
     <Content Include="assets\Logo\LOGO.png" />
     <Content Include="assets\SQL\VlazaSQL.sql" />
     <Content Include="Cadastro.aspx" />
+    <Content Include="Cliente\MinhaConta.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Inicio.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="LogOut.aspx" />
     <Content Include="RecuperarSenha.aspx" />
+    <Content Include="Util.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -822,6 +826,13 @@
     </Compile>
     <Compile Include="Admin\AdminLayOut.Master.designer.cs">
       <DependentUpon>AdminLayOut.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Catalogo\Atributos.aspx.cs">
+      <DependentUpon>Atributos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Catalogo\Atributos.aspx.designer.cs">
+      <DependentUpon>Atributos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Catalogo\Categorias.aspx.cs">
       <DependentUpon>Categorias.aspx</DependentUpon>
@@ -864,6 +875,13 @@
     </Compile>
     <Compile Include="Cadastro.aspx.designer.cs">
       <DependentUpon>Cadastro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente\MinhaConta.aspx.cs">
+      <DependentUpon>MinhaConta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cliente\MinhaConta.aspx.designer.cs">
+      <DependentUpon>MinhaConta.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -148,7 +148,8 @@
                                 <asp:RoleGroup Roles="Admin">
                                     <ContentTemplate>
                                         <li>
-                                            <asp:LoginName ID="LoginName1" runat="server" />
+                                            <%=ConfigurationManager.AppSettings["Usuario"] %>
+                                            <%--<asp:LoginName ID="LoginName1" runat="server" />--%>
                                         </li>
                                         <li>
                                             <a href="/Admin/PanelPrincipal.aspx" style="color: blue; font-weight: bold">Administrar</a>
@@ -161,7 +162,7 @@
                                 <asp:RoleGroup Roles="Cliente">
                                     <ContentTemplate>
                                         <li>
-                                            <asp:LoginName ID="LoginName1" runat="server" />
+                                            <%=ConfigurationManager.AppSettings["Usuario"] %>
                                         </li>
 
                                         <li>

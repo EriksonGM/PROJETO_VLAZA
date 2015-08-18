@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -13,7 +16,7 @@ namespace SuperOgame
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            WebSecurity.InitializeDatabaseConnection("Conn", "Tb_Usuario", "Id_Usuario", "Nome", true);
+            WebSecurity.InitializeDatabaseConnection("Conn", "Tb_Usuario", "Id_Usuario", "Email", true);
 
             if (!Roles.RoleExists("Admin"))
             {
@@ -25,11 +28,11 @@ namespace SuperOgame
                 Roles.CreateRole("Cliente");
             }
 
-            if (!WebSecurity.UserExists("Admin"))
+            if (!WebSecurity.UserExists("admin@vlaza.com"))
             {
-                WebSecurity.CreateUserAndAccount("Admin", "qwerty123#", new
+                WebSecurity.CreateUserAndAccount("admin@vlaza.com", "qwerty123#", new
                 {
-                    Email = "admin@vlaza.com",
+                    Nome = "Admin",
                     TelfPrim = "000000000"
 
                 });
@@ -41,6 +44,31 @@ namespace SuperOgame
         protected void Session_Start(object sender, EventArgs e)
         {
 
+            if (!string.IsNullOrEmpty(WebSecurity.CurrentUserName))
+            {
+                try
+                {
+                    using (SqlConnection SQLconn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conn"].ToString()))
+                    {
+                        SqlCommand cmd = new SqlCommand("EmailToUser", SQLconn);
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@Email", SqlDbType.VarChar, 50);
+                        cmd.Parameters["@Email"].Value = WebSecurity.CurrentUserName;
+
+                        SQLconn.Open();
+                        //string U = cmd.ExecuteScalar().ToString();
+                        ConfigurationManager.AppSettings["Usuario"] = cmd.ExecuteScalar().ToString(); 
+
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                } 
+            }
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
@@ -60,7 +88,7 @@ namespace SuperOgame
 
         protected void Session_End(object sender, EventArgs e)
         {
-
+            ConfigurationManager.AppSettings["Usuario"] = "Convidado";
         }
 
         protected void Application_End(object sender, EventArgs e)

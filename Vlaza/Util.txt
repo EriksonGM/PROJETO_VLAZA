@@ -1,0 +1,112 @@
+﻿<div class="row">
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                <div class="col-md-5 col-sm-6">
+                    <div class="portlet light">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa  fa-list font-green-sharp"></i>
+                                <span class="caption-subject font-green-sharp bold uppercase">Categorias</span>
+                                <span class="caption-helper">para Produtos</span>
+                            </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse"></a>
+
+                                <%--<a href="javascript:;" class="reload"></a>--%>
+                                <asp:LinkButton ID="lbReload" runat="server" CssClass="reload"></asp:LinkButton>
+                                <a href="javascript:;" class="remove"></a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="row">
+                                <div class="col-md-8 ">
+                                    <asp:TextBox ID="txtCategoria" runat="server" CssClass="form-control" placeholder="Nova Categoria" MaxLength="30">
+                                    </asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Falta a Categoria" CssClass="required" ControlToValidate="txtCategoria" ValidationGroup="Categoria" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <br />
+                                </div>
+
+                                <div class="col-md-4">
+                                    <asp:LinkButton ID="lbGuardar" runat="server" CssClass="btn btn-primary" ValidationGroup="Categoria" Width="100%"><i class="fa fa-save"></i> Guardar</asp:LinkButton>
+                                </div>
+                            </div>
+                            <hr />
+                            <asp:ListView ID="lvCategorias" runat="server" DataSourceID="SqlDataSourceCategoria" DataKeyNames="Id_Categoria" OnItemCommand="lvCategorias_ItemCommand">
+
+
+                                <EmptyDataTemplate>
+                                    <table runat="server" style="">
+                                        <tr>
+                                            <td>
+                                                <p style="text-align: center">
+                                                    <strong>Nenhuma Categoria Registada.</strong>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </EmptyDataTemplate>
+
+                                <ItemTemplate>
+                                    <tr style="">
+                                        <td>
+
+                                            <asp:Label Text='<%# Eval("Categoria") %>' runat="server" ID="CategoriaLabel" />
+
+                                        </td>
+                                        <td>
+                                            <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-primary btn-sm" CommandName="Edit"><i class="fa fa-edit"></i></asp:LinkButton>
+                                        </td>
+
+                                    </tr>
+                                </ItemTemplate>
+                                <LayoutTemplate>
+                                    <table runat="server" style="width: 100%">
+                                        <tr runat="server">
+                                            <td runat="server">
+                                                <table runat="server" id="itemPlaceholderContainer" style="" border="0" class="table table-hover">
+                                                    <tr runat="server" style="">
+                                                        <th runat="server">Categorias</th>
+                                                        <th runat="server" style="width: 100px">Opções</th>
+
+                                                    </tr>
+                                                    <tr runat="server" id="itemPlaceholder"></tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr runat="server">
+                                            <td runat="server" style=""></td>
+                                        </tr>
+                                    </table>
+                                </LayoutTemplate>
+                                <EditItemTemplate>
+                                    <tr style="">
+
+                                        <td>
+                                            <asp:TextBox ID="txtEditCat" runat="server" Text='<%# Eval("Categoria") %>' MaxLength="30" CssClass="form-control" ValidationGroup="EditCat"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Falta a Categoria" ControlToValidate="txtEditCat" Display="Dynamic" ValidationGroup="EditCat"></asp:RequiredFieldValidator>
+                                        </td>
+                                        <td>
+                                            <asp:LinkButton runat="server" ID="a" CssClass="btn btn-success btn-sm" CommandName="Update" CommandArgument='<%# Eval("Id_Categoria") %>' ValidationGroup="EditCat"><i class="fa fa-check"></i></asp:LinkButton>
+                                            <asp:LinkButton runat="server" ID="b" CssClass="btn btn-danger btn-sm" CommandName="Cancel"><i class="fa fa-ban"></i></asp:LinkButton>
+                                        </td>
+                                    </tr>
+                                </EditItemTemplate>
+                            </asp:ListView>
+                            <asp:SqlDataSource runat="server" ID="SqlDataSourceCategoria" ConnectionString='<%$ ConnectionStrings:Conn %>' SelectCommand="SELECT * FROM [Tb_Categoria]" InsertCommand="INSERT INTO Tb_Categoria(Categoria, Id_Usuario) VALUES (@Categoria, @Id_Usuario)" UpdateCommand="UPDATE Tb_Categoria SET Categoria = @Categoria, Id_Usuario = @Id_Usuario, CMD = 'Update', Data = GETDATE() WHERE (Id_Categoria = @Id_Categoria)">
+                                <InsertParameters>
+                                    <asp:ControlParameter ControlID="txtCategoria" Name="Categoria" PropertyName="Text" />
+                                    <asp:Parameter Name="Id_Usuario" />
+                                </InsertParameters>
+                                <UpdateParameters>
+                                    <asp:Parameter Name="Categoria" />
+                                    <asp:Parameter Name="Id_Usuario" />
+                                    <asp:Parameter Name="Id_Categoria" />
+                                </UpdateParameters>
+                            </asp:SqlDataSource>
+                        </div>
+
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
