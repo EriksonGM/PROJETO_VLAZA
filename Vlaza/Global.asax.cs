@@ -43,32 +43,7 @@ namespace SuperOgame
 
         protected void Session_Start(object sender, EventArgs e)
         {
-
-            if (!string.IsNullOrEmpty(WebSecurity.CurrentUserName))
-            {
-                try
-                {
-                    using (SqlConnection SQLconn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conn"].ToString()))
-                    {
-                        SqlCommand cmd = new SqlCommand("EmailToUser", SQLconn);
-
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        cmd.Parameters.Add("@Email", SqlDbType.VarChar, 50);
-                        cmd.Parameters["@Email"].Value = WebSecurity.CurrentUserName;
-
-                        SQLconn.Open();
-                        //string U = cmd.ExecuteScalar().ToString();
-                        ConfigurationManager.AppSettings["Usuario"] = cmd.ExecuteScalar().ToString(); 
-
-                    }
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                } 
-            }
+           
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

@@ -25,5 +25,24 @@ namespace Vlaza.Admin.Catalogo
                 
             //}
         }
+
+        protected void SqlDataSourceAtributos_Updating(object sender, SqlDataSourceCommandEventArgs e)
+        {
+            
+        }
+
+        protected void lvAtributos_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Update")
+            {
+                SqlDataSourceAtributos.UpdateParameters["Id_Usuario"].DefaultValue = WebMatrix.WebData.WebSecurity.CurrentUserId.ToString();
+                SqlDataSourceAtributos.UpdateParameters["Id_Atributo"].DefaultValue = e.CommandArgument.ToString();
+                TextBox txt = (TextBox)e.Item.FindControl("txtEditAtri");
+                SqlDataSourceAtributos.UpdateParameters["Atributo"].DefaultValue = txt.Text;
+                SqlDataSourceAtributos.Update();
+                lvAtributos.DataBind();
+                
+            }
+        }
     }
 }

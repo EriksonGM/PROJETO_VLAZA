@@ -91,7 +91,6 @@
                                 </LayoutTemplate>
                                 <EditItemTemplate>
                                     <tr style="">
-
                                         <td>
                                             <asp:TextBox ID="txtEditCat" runat="server" Text='<%# Eval("Categoria") %>' MaxLength="30" CssClass="form-control" ValidationGroup="EditCat"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Falta a Categoria" ControlToValidate="txtEditCat" Display="Dynamic" ValidationGroup="EditCat"></asp:RequiredFieldValidator>

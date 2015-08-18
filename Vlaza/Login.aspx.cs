@@ -23,6 +23,7 @@ namespace Vlaza
         {
             if (WebSecurity.Login(txtEmail.Text, txtPass.Text))
             {
+
                 var returnUrl = Request.QueryString["ReturnUrl"];
 
                 if (string.IsNullOrEmpty(returnUrl))
@@ -47,6 +48,32 @@ namespace Vlaza
             {
                 if (WebSecurity.Login(txtEmail.Text, txtPass.Text))
                 {
+                    if (!string.IsNullOrEmpty(WebSecurity.CurrentUserName))
+                    {
+                        try
+                        {
+                            using (SqlConnection SQLconn = new SqlConnection(ConfigurationManager.ConnectionStrings["Conn"].ToString()))
+                            {
+                                SqlCommand cmd = new SqlCommand("EmailToUser", SQLconn);
+
+                                cmd.CommandType = CommandType.StoredProcedure;
+
+                                cmd.Parameters.Add("@Email", SqlDbType.VarChar, 50);
+                                cmd.Parameters["@Email"].Value = WebSecurity.CurrentUserName;
+
+                                SQLconn.Open();
+                                //string U = cmd.ExecuteScalar().ToString();
+                                ConfigurationManager.AppSettings["Usuario"] = cmd.ExecuteScalar().ToString();
+
+                            }
+                        }
+                        catch (Exception)
+                        {
+
+                            throw;
+                        }
+                    }
+
                     var returnUrl = Request.QueryString["ReturnUrl"];
 
                     if (string.IsNullOrEmpty(returnUrl))

@@ -42,14 +42,14 @@
                                 </div>
                             </div>
                             <hr />
-                            <asp:ListView ID="lvAtributos" runat="server" DataSourceID="SqlDataSourceAtributos" DataKeyNames="Id_Atributo">
+                            <asp:ListView ID="lvAtributos" runat="server" DataSourceID="SqlDataSourceAtributos" DataKeyNames="Id_Atributo" OnItemCommand="lvAtributos_ItemCommand">
                                 
                                <EditItemTemplate>
                                     <tr style="">
 
                                         <td>
-                                            <asp:TextBox ID="txtEditCat" runat="server" Text='<%# Eval("Atributo") %>' MaxLength="30" CssClass="form-control" ValidationGroup="EditAtri"></asp:TextBox>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Falta a Categoria" ControlToValidate="txtEditCat" Display="Dynamic" ValidationGroup="EditAtri"></asp:RequiredFieldValidator>
+                                            <asp:TextBox ID="txtEditAtri" runat="server" Text='<%# Eval("Atributo") %>' MaxLength="30" CssClass="form-control" ValidationGroup="EditAtri"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Falta a Categoria" ControlToValidate="txtEditAtri" Display="Dynamic" ValidationGroup="EditAtri"></asp:RequiredFieldValidator>
                                         </td>
                                         <td>
                                             <asp:LinkButton runat="server" ID="a" CssClass="btn btn-success btn-sm" CommandName="Update" CommandArgument='<%# Eval("Id_Atributo") %>' ValidationGroup="EditAtri"><i class="fa fa-check"></i></asp:LinkButton>
@@ -89,7 +89,7 @@
                                                 <table runat="server" id="itemPlaceholderContainer" style="" border="0" class="table table-hover">
                                                     <tr runat="server" style="">
                                                         <th runat="server">Atributos</th>
-                                                        <th runat="server">Opções</th>
+                                                        <th runat="server" style="width: 100px">Opções</th>
                                                     </tr>
                                                     <tr runat="server" id="itemPlaceholder"></tr>
                                                 </table>
@@ -100,21 +100,19 @@
                                         </tr>
                                     </table>
                                 </LayoutTemplate>
-                                <SelectedItemTemplate>
-                                    <tr style="">
-                                        <td>
-                                            <asp:Label Text='<%# Eval("Id_Atributo") %>' runat="server" ID="Id_AtributoLabel" /></td>
-                                        <td>
-                                            <asp:Label Text='<%# Eval("Atributo") %>' runat="server" ID="AtributoLabel" /></td>
-                                    </tr>
-                                </SelectedItemTemplate>
+                              
                             </asp:ListView>
 
-                            <asp:SqlDataSource runat="server" ID="SqlDataSourceAtributos" ConnectionString='<%$ ConnectionStrings:Conn %>' SelectCommand="SELECT [Id_Atributo], [Atributo] FROM [Tb_Atributo]" InsertCommand="INSERT INTO Tb_Atributo(Atributo, Id_Usuario, CMD) VALUES (@Atributo, @Id_Usuario, 'Insert')">
+                            <asp:SqlDataSource runat="server" ID="SqlDataSourceAtributos" ConnectionString='<%$ ConnectionStrings:Conn %>' SelectCommand="SELECT [Id_Atributo], [Atributo] FROM [Tb_Atributo]" InsertCommand="INSERT INTO Tb_Atributo(Atributo, Id_Usuario, CMD) VALUES (@Atributo, @Id_Usuario, 'Insert')" UpdateCommand="UPDATE Tb_Atributo SET Atributo = @Atributo, Id_Usuario = @Id_Usuario, CMD = 'Update', Data = GETDATE() Where Id_Atributo =@Id_Atributo">
                                 <InsertParameters>
                                     <asp:ControlParameter ControlID="txtAtributo" Name="Atributo" PropertyName="Text" />
                                     <asp:Parameter Name="Id_Usuario" />
                                 </InsertParameters>
+                                <UpdateParameters>
+                                    <asp:Parameter Name="Atributo" />
+                                    <asp:Parameter Name="Id_Usuario" />
+                                    <asp:Parameter Name="Id_Atributo" />
+                                </UpdateParameters>
                             </asp:SqlDataSource>
                         </div>
 

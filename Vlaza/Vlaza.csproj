@@ -67,6 +67,7 @@
     <Content Include="Admin\Catalogo\Atributos.aspx" />
     <Content Include="Admin\Catalogo\Categorias.aspx" />
     <Content Include="Admin\Catalogo\NovoProduto.aspx" />
+    <Content Include="Admin\Catalogo\Produto.aspx" />
     <Content Include="Admin\Catalogo\Produtos.aspx" />
     <Content Include="Admin\Contabilidade\ConfirmacaoDepositos.aspx" />
     <Content Include="Admin\PanelPrincipal.aspx" />
@@ -847,6 +848,13 @@
     </Compile>
     <Compile Include="Admin\Catalogo\NovoProduto.aspx.designer.cs">
       <DependentUpon>NovoProduto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Catalogo\Produto.aspx.cs">
+      <DependentUpon>Produto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Catalogo\Produto.aspx.designer.cs">
+      <DependentUpon>Produto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Catalogo\Produtos.aspx.cs">
       <DependentUpon>Produtos.aspx</DependentUpon>
